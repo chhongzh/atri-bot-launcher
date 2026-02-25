@@ -1,3 +1,3 @@
 # Atri Bot Launcher
 
-一个vibe-coding出来的启动器.
+一个vibe-code出来的启动器.
