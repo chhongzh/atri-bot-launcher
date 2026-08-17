@@ -11,9 +11,17 @@ class NotificationService extends GetxService {
       android: AndroidInitializationSettings('@mipmap/ic_launcher'),
       iOS: DarwinInitializationSettings(),
       macOS: DarwinInitializationSettings(),
+      linux: LinuxInitializationSettings(
+        defaultActionName: '打开 Atri Bot Launcher',
+      ),
+      windows: WindowsInitializationSettings(
+        appName: 'Atri Bot Launcher',
+        appUserModelId: 'dev.chhongzh.atriBotLauncher',
+        guid: '6f1e6b37-ebe1-43e3-9738-f665e9496edc',
+      ),
     );
     try {
-      await _notifications.initialize(settings);
+      await _notifications.initialize(settings: settings);
       await _notifications
           .resolvePlatformSpecificImplementation<
             AndroidFlutterLocalNotificationsPlugin
@@ -30,10 +38,10 @@ class NotificationService extends GetxService {
     );
     try {
       await _notifications.show(
-        1001,
-        'atri-bot 内核已停止',
-        exitCode == 0 ? '进程已正常退出' : '进程异常退出，退出码：$exitCode',
-        const NotificationDetails(
+        id: 1001,
+        title: 'atri-bot 内核已停止',
+        body: exitCode == 0 ? '进程已正常退出' : '进程异常退出，退出码：$exitCode',
+        notificationDetails: const NotificationDetails(
           android: AndroidNotificationDetails(
             'atri_bot_process',
             '进程状态',
@@ -43,6 +51,8 @@ class NotificationService extends GetxService {
           ),
           iOS: DarwinNotificationDetails(),
           macOS: DarwinNotificationDetails(),
+          linux: LinuxNotificationDetails(),
+          windows: WindowsNotificationDetails(),
         ),
       );
     } catch (_) {}

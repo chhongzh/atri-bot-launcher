@@ -25,7 +25,7 @@ android {
         applicationId = "com.example.atri_bot_launcher"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
-        minSdk = flutter.minSdkVersion
+        minSdk = 24
         // Keep the sideload-only Android build on the legacy execution path.
         // Android 10+ blocks exec() of files written below the app data
         // directory for apps targeting API 29 or newer. The launcher uses

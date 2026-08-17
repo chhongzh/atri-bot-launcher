@@ -11,7 +11,7 @@ dependencies:
   flutter:
     sdk: flutter
   archive: ^4.0.7
-  flutter_local_notifications: 18.0.1
+  flutter_local_notifications: 22.3.0
   flutter_system_proxy: ^0.2.0
   get: ^4.7.2
   path: ^1.9.1
