@@ -17,22 +17,18 @@ jobs:
         include:
           - platform: Android
             os: ubuntu-latest
-            shell: bash
             command: flutter build apk --release
             package: mkdir -p dist && cp build/app/outputs/flutter-apk/app-release.apk dist/atri-bot-launcher-android.apk
           - platform: Linux
             os: ubuntu-latest
-            shell: bash
             command: flutter build linux --release
             package: mkdir -p dist && tar -C build/linux/x64/release/bundle -czf dist/atri-bot-launcher-linux-x64.tar.gz .
           - platform: macOS
             os: macos-latest
-            shell: bash
             command: flutter build macos --release
             package: mkdir -p dist && ditto -c -k --sequesterRsrc --keepParent build/macos/Build/Products/Release/atri_bot_launcher.app dist/atri-bot-launcher-macos.zip
           - platform: Windows
             os: windows-latest
-            shell: pwsh
             command: flutter build windows --release
             package: New-Item -ItemType Directory -Force dist | Out-Null; Compress-Archive -Path build/windows/x64/runner/Release/* -DestinationPath dist/atri-bot-launcher-windows-x64.zip
     runs-on: ${{ matrix.os }}
@@ -49,7 +45,6 @@ jobs:
       - run: flutter pub get
       - run: ${{ matrix.command }}
       - name: Package release asset
-        shell: ${{ matrix.shell }}
         run: ${{ matrix.package }}
       - uses: actions/upload-artifact@v4
         with:
