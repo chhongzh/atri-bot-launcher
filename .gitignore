@@ -248,3 +248,6 @@ GoogleService-Info.plist
 google-services.json
 # Plugins (already resolved through pubspec.yaml)
 .flutter-plugins
+
+# Kotlin Gradle plugin build cache
+android/.kotlin/

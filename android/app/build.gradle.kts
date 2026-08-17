@@ -35,6 +35,12 @@ android {
         versionName = flutter.versionName
     }
 
+    lint {
+        // The Android build is sideloaded and intentionally targets API 28.
+        // Do not make release packaging fail on the Google Play target-SDK check.
+        checkReleaseBuilds = false
+    }
+
     buildTypes {
         release {
             // TODO: Add your own signing config for the release build.
