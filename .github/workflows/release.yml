@@ -26,7 +26,7 @@ jobs:
           - platform: macOS
             os: macos-latest
             command: flutter build macos --release
-            package: mkdir -p dist && ditto -c -k --sequesterRsrc --keepParent build/macos/Build/Products/Release/atri_bot_launcher.app dist/atri-bot-launcher-macos.zip
+            package: mkdir -p dist && ditto -c -k --sequesterRsrc --keepParent "build/macos/Build/Products/Release/Atri Bot Launcher.app" dist/atri-bot-launcher-macos.zip
           - platform: Windows
             os: windows-latest
             command: flutter build windows --release
