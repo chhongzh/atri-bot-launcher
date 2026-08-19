@@ -63,7 +63,7 @@ class MainApp extends StatelessWidget {
       ),
       themeMode: ThemeMode.system,
       scaffoldMessengerKey: Get.find<NotificationService>().messengerKey,
-      home: const AppShell(),
+      home: const SafeArea(child: AppShell()),
     );
   }
 }

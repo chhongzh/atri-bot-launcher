@@ -94,7 +94,7 @@ class AppController extends GetxController {
   Future<void> saveConfig() async {
     try {
       await config.save();
-      notifications.showSnackBar('配置已保存', config.path.value);
+      notifications.showSnackBar('配置已保存', '');
     } catch (exception) {
       _showError('保存失败', '$exception');
     }

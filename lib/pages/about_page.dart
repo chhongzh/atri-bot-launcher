@@ -35,10 +35,19 @@ class AboutPage extends StatelessWidget {
                 const SizedBox(height: 8),
                 const Text('欢迎到 GitHub 点个 Star，支持启动器继续开发。'),
                 const SizedBox(height: 16),
-                FilledButton.icon(
-                  onPressed: () => _openUrl(context, _launcherUri),
-                  icon: const Icon(Icons.star_outline),
-                  label: const Text('给启动器点个 Star'),
+                Row(
+                  children: [
+                    FilledButton.icon(
+                      onPressed: () => _openUrl(context, _atriBotUri),
+                      icon: const Icon(Icons.star_outline),
+                      label: const Text('给Atri-Bot点个 Star'),
+                    ),
+                    OutlinedButton.icon(
+                      onPressed: () => _openUrl(context, _launcherUri),
+                      icon: const Icon(Icons.star_outline),
+                      label: const Text('给启动器点个 Star'),
+                    ),
+                  ],
                 ),
               ],
             ),

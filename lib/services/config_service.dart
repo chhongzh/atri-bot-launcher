@@ -140,7 +140,7 @@ class ConfigService extends GetxService {
   Map<String, dynamic> _defaults() => {
     'telegram': {'bot_token': ''},
     'default': {
-      'max_rounds': 36,
+      'max_rounds': 12,
       'image_max_edge': 1024,
       'mcp_max_tools': 128,
       'tool_permissions': <String, bool>{},

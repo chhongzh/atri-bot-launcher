@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.atri_bot_launcher"
+    namespace = "dev.chhongzh.atri_bot_launcher"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
@@ -22,7 +22,7 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId = "com.example.atri_bot_launcher"
+        applicationId = "dev.chhongzh.atri_bot_launcher"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
         minSdk = 24

@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import '../controllers/app_controller.dart';
 import '../models/release.dart';
 import '../services/release_service.dart';
-import '../services/settings_service.dart';
 
 class ReleasesPage extends StatelessWidget {
   const ReleasesPage({super.key});
@@ -37,7 +36,7 @@ class ReleasesPage extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 8),
-            Text('只显示满足最低版本 v${SettingsService.minimumVersion} 的 SemVer 发布。'),
+            Text('请优先选择高版本运行'),
             const SizedBox(height: 16),
             if (releases.releases.isEmpty)
               Card(
