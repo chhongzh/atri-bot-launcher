@@ -251,3 +251,5 @@ google-services.json
 
 # Kotlin Gradle plugin build cache
 android/.kotlin/
+# Widget Preview related
+.widget_preview/
