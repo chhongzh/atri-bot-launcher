@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:ffi';
 import 'dart:io';
 
 import 'package:archive/archive.dart';
@@ -75,9 +76,24 @@ class ReleaseService extends GetxService {
     BotRelease release, {
     void Function(double progress)? onProgress,
   }) async {
-    final asset = _selectAsset(release);
-    if (asset == null) throw StateError('没有找到适合当前平台的发布文件');
-    logs.info('已选择发布文件', {'version': release.tagName, 'asset': asset.name});
+    final operatingSystem = _operatingSystem();
+    final architecture = _architecture();
+    final asset = _selectAsset(release, operatingSystem, architecture);
+    if (asset == null) {
+      final availableAssets = release.assets
+          .map((asset) => asset.name)
+          .join('、');
+      throw StateError(
+        '没有找到适合当前设备的发布文件（$operatingSystem / $architecture）。'
+        '此版本提供：${availableAssets.isEmpty ? '无发布文件' : availableAssets}',
+      );
+    }
+    logs.info('已选择发布文件', {
+      'version': release.tagName,
+      'platform': operatingSystem,
+      'architecture': architecture,
+      'asset': asset.name,
+    });
     final root = Directory(
       path.join(settings.dataDirectory.value, 'releases', release.tagName),
     );
@@ -188,24 +204,34 @@ class ReleaseService extends GetxService {
     onProgress?.call(progress);
   }
 
-  ReleaseAsset? _selectAsset(BotRelease release) {
-    final architecture = _architecture();
-    final operatingSystem = Platform.isAndroid
-        ? 'android'
-        : Platform.isWindows
-        ? 'windows'
-        : Platform.isMacOS
-        ? 'darwin'
-        : 'linux';
-    final matching = release.assets.where((asset) {
+  ReleaseAsset? _selectAsset(
+    BotRelease release,
+    String operatingSystem,
+    String architecture,
+  ) {
+    final operatingSystemAliases = switch (operatingSystem) {
+      'darwin' => const ['darwin', 'macos'],
+      _ => [operatingSystem],
+    };
+    final architectureAliases = switch (architecture) {
+      'x86_64' => const ['x86_64', 'amd64', 'x64'],
+      'arm64' => const ['arm64', 'aarch64'],
+      'i386' => const ['i386', '386', 'ia32'],
+      _ => [architecture],
+    };
+    return release.assets.firstWhereOrNull((asset) {
       final name = asset.name.toLowerCase();
-      return name.contains(operatingSystem) && name.contains(architecture);
-    }).toList();
-    if (matching.isNotEmpty) return matching.first;
-    for (final asset in release.assets) {
-      if (asset.name.toLowerCase().contains(operatingSystem)) return asset;
-    }
-    return null;
+      return operatingSystemAliases.any(
+            (alias) => _hasAssetToken(name, alias),
+          ) &&
+          architectureAliases.any((alias) => _hasAssetToken(name, alias));
+    });
+  }
+
+  bool _hasAssetToken(String assetName, String token) {
+    return RegExp(
+      '(^|[^a-z0-9])${RegExp.escape(token)}([^a-z0-9]|\$)',
+    ).hasMatch(assetName);
   }
 
   Future<String> _prepareAsset(File downloaded, Directory root) async {
@@ -250,22 +276,23 @@ class ReleaseService extends GetxService {
     return fileName == 'atri-bot' || fileName == 'atri-bot.exe';
   }
 
+  String _operatingSystem() {
+    if (Platform.isAndroid) return 'android';
+    if (Platform.isWindows) return 'windows';
+    if (Platform.isMacOS) return 'darwin';
+    if (Platform.isLinux) return 'linux';
+    throw UnsupportedError('当前操作系统不支持下载 atri-bot 内核');
+  }
+
   String _architecture() {
-    final version = Platform.version.toLowerCase();
-    if (version.contains('arm64') || version.contains('aarch64')) {
-      return 'arm64';
-    }
-    if (version.contains('x64') || version.contains('amd64')) return 'amd64';
-    if (!Platform.isAndroid) {
-      try {
-        final result = Process.runSync('uname', ['-m']);
-        final machine = '${result.stdout}'.toLowerCase();
-        if (machine.contains('arm64') || machine.contains('aarch64')) {
-          return 'arm64';
-        }
-      } catch (_) {}
-    }
-    return 'arm64';
+    final abi = Abi.current().toString().toLowerCase();
+    if (abi.endsWith('_x64')) return 'x86_64';
+    if (abi.endsWith('_arm64')) return 'arm64';
+    if (abi.endsWith('_ia32')) return 'i386';
+    if (abi.endsWith('_arm')) return 'arm';
+    if (abi.endsWith('_riscv64')) return 'riscv64';
+    if (abi.endsWith('_riscv32')) return 'riscv32';
+    throw UnsupportedError('无法识别当前设备架构：$abi');
   }
 
   BotRelease _parseRelease(Map release) {
