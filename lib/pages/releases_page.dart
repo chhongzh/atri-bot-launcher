@@ -57,7 +57,9 @@ class ReleasesPage extends StatelessWidget {
             ...releases.releases.map(
               (release) => ReleaseTile(
                 release: release,
-                onInstall: () => app.install(release),
+                onInstall: releases.downloading.value
+                    ? null
+                    : () => app.install(release),
               ),
             ),
           ],
@@ -75,7 +77,7 @@ class ReleaseTile extends StatelessWidget {
   });
 
   final BotRelease release;
-  final VoidCallback onInstall;
+  final VoidCallback? onInstall;
 
   @override
   Widget build(BuildContext context) {

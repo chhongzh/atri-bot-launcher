@@ -2,7 +2,43 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/android.iml" filepath="$PROJECT_DIR$/.idea/modules/android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/android.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/android.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/android.app.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/android.app.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/android.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/android.app.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/android.app.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/android.app.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-1118641948/android.flutter_local_notifications.iml" filepath="$PROJECT_DIR$/.idea/modules/-1118641948/android.flutter_local_notifications.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-1118641948/android.flutter_local_notifications.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/-1118641948/android.flutter_local_notifications.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-1118641948/android.flutter_local_notifications.main.iml" filepath="$PROJECT_DIR$/.idea/modules/-1118641948/android.flutter_local_notifications.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-1118641948/android.flutter_local_notifications.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/-1118641948/android.flutter_local_notifications.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-141206977/android.flutter_native_splash.iml" filepath="$PROJECT_DIR$/.idea/modules/-141206977/android.flutter_native_splash.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-141206977/android.flutter_native_splash.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/-141206977/android.flutter_native_splash.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-141206977/android.flutter_native_splash.main.iml" filepath="$PROJECT_DIR$/.idea/modules/-141206977/android.flutter_native_splash.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-141206977/android.flutter_native_splash.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/-141206977/android.flutter_native_splash.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/361161995/android.flutter_system_proxy.iml" filepath="$PROJECT_DIR$/.idea/modules/361161995/android.flutter_system_proxy.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/361161995/android.flutter_system_proxy.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/361161995/android.flutter_system_proxy.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/361161995/android.flutter_system_proxy.main.iml" filepath="$PROJECT_DIR$/.idea/modules/361161995/android.flutter_system_proxy.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/361161995/android.flutter_system_proxy.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/361161995/android.flutter_system_proxy.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/511936943/android.jni.iml" filepath="$PROJECT_DIR$/.idea/modules/511936943/android.jni.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/511936943/android.jni.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/511936943/android.jni.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/511936943/android.jni.main.iml" filepath="$PROJECT_DIR$/.idea/modules/511936943/android.jni.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/511936943/android.jni.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/511936943/android.jni.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/650661579/android.jni_flutter.iml" filepath="$PROJECT_DIR$/.idea/modules/650661579/android.jni_flutter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/650661579/android.jni_flutter.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/650661579/android.jni_flutter.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/650661579/android.jni_flutter.main.iml" filepath="$PROJECT_DIR$/.idea/modules/650661579/android.jni_flutter.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/650661579/android.jni_flutter.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/650661579/android.jni_flutter.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-324268043/android.shared_preferences_android.iml" filepath="$PROJECT_DIR$/.idea/modules/-324268043/android.shared_preferences_android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-324268043/android.shared_preferences_android.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/-324268043/android.shared_preferences_android.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-324268043/android.shared_preferences_android.main.iml" filepath="$PROJECT_DIR$/.idea/modules/-324268043/android.shared_preferences_android.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-324268043/android.shared_preferences_android.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/-324268043/android.shared_preferences_android.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-185023012/android.url_launcher_android.iml" filepath="$PROJECT_DIR$/.idea/modules/-185023012/android.url_launcher_android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-185023012/android.url_launcher_android.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/-185023012/android.url_launcher_android.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-185023012/android.url_launcher_android.main.iml" filepath="$PROJECT_DIR$/.idea/modules/-185023012/android.url_launcher_android.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-185023012/android.url_launcher_android.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/-185023012/android.url_launcher_android.unitTest.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/atri-bot-launcher.iml" filepath="$PROJECT_DIR$/.idea/atri-bot-launcher.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/289906452/gradle.iml" filepath="$PROJECT_DIR$/.idea/modules/289906452/gradle.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/289906452/gradle.main.iml" filepath="$PROJECT_DIR$/.idea/modules/289906452/gradle.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/289906452/gradle.test.iml" filepath="$PROJECT_DIR$/.idea/modules/289906452/gradle.test.iml" />
     </modules>
   </component>
 </project>

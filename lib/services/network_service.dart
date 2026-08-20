@@ -13,6 +13,7 @@ class NetworkService extends GetxService {
 
   final LogService logs;
   late final Dio client;
+  final _loggedProxyRoutes = <String>{};
 
   Future<NetworkService> init() async {
     client = Dio(
@@ -23,14 +24,15 @@ class NetworkService extends GetxService {
       ),
     );
     client.httpClientAdapter = _SystemProxyHttpClientAdapter(_findProxy);
-    logs.info('Dio HTTP 客户端已初始化，已启用系统代理检测');
+    logs.info('Dio HTTP 客户端已初始化，已启用系统与环境代理检测');
     return this;
   }
 
   Future<String> _findProxy(Uri uri) async {
+    var proxy = HttpClient.findProxyFromEnvironment(uri);
     if (Platform.isAndroid || Platform.isIOS) {
       try {
-        return await FlutterSystemProxy.findProxyFromEnvironment(
+        proxy = await FlutterSystemProxy.findProxyFromEnvironment(
           uri.toString(),
         );
       } on MissingPluginException catch (exception) {
@@ -41,7 +43,11 @@ class NetworkService extends GetxService {
         });
       }
     }
-    return HttpClient.findProxyFromEnvironment(uri);
+    final route = '${uri.host}|$proxy';
+    if (_loggedProxyRoutes.add(route)) {
+      logs.info('网络请求代理已解析', {'target': uri.host, 'proxy': proxy});
+    }
+    return proxy;
   }
 
   @override

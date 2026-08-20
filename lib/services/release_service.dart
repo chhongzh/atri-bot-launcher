@@ -76,31 +76,35 @@ class ReleaseService extends GetxService {
     BotRelease release, {
     void Function(double progress)? onProgress,
   }) async {
-    final operatingSystem = _operatingSystem();
-    final architecture = _architecture();
-    final asset = _selectAsset(release, operatingSystem, architecture);
-    if (asset == null) {
-      final availableAssets = release.assets
-          .map((asset) => asset.name)
-          .join('、');
-      throw StateError(
-        '没有找到适合当前设备的发布文件（$operatingSystem / $architecture）。'
-        '此版本提供：${availableAssets.isEmpty ? '无发布文件' : availableAssets}',
-      );
+    if (downloading.value) {
+      throw StateError('已有内核正在下载，请等待当前下载完成');
     }
-    logs.info('已选择发布文件', {
-      'version': release.tagName,
-      'platform': operatingSystem,
-      'architecture': architecture,
-      'asset': asset.name,
-    });
-    final root = Directory(
-      path.join(settings.dataDirectory.value, 'releases', release.tagName),
-    );
     downloading.value = true;
     downloadProgress.value = 0;
-    downloadLabel.value = asset.name;
+    downloadLabel.value = release.tagName;
     try {
+      final operatingSystem = _operatingSystem();
+      final architecture = _architecture();
+      final asset = _selectAsset(release, operatingSystem, architecture);
+      if (asset == null) {
+        final availableAssets = release.assets
+            .map((asset) => asset.name)
+            .join('、');
+        throw StateError(
+          '没有找到适合当前设备的发布文件（$operatingSystem / $architecture）。'
+          '此版本提供：${availableAssets.isEmpty ? '无发布文件' : availableAssets}',
+        );
+      }
+      downloadLabel.value = asset.name;
+      logs.info('已选择发布文件', {
+        'version': release.tagName,
+        'platform': operatingSystem,
+        'architecture': architecture,
+        'asset': asset.name,
+      });
+      final root = Directory(
+        path.join(settings.dataDirectory.value, 'releases', release.tagName),
+      );
       await root.create(recursive: true);
       final destination = File(path.join(root.path, asset.name));
       late final dio.Response<dio.ResponseBody> response;
