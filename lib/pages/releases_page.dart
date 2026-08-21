@@ -36,7 +36,7 @@ class ReleasesPage extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 8),
-            Text('请优先选择高版本运行'),
+            Text('当前仅显示最新版本'),
             const SizedBox(height: 16),
             if (releases.releases.isEmpty)
               Card(
@@ -50,7 +50,7 @@ class ReleasesPage extends StatelessWidget {
                     releases.error.value == null ? '暂无可用版本' : '获取版本失败',
                   ),
                   subtitle: Text(
-                    releases.error.value ?? '请检查网络，或确认仓库中已有 v2 及以上 release。',
+                    releases.error.value ?? '请检查网络，或确认仓库中已有可用 release。',
                   ),
                 ),
               ),

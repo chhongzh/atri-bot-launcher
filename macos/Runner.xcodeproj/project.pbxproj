@@ -387,7 +387,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.atriBotLauncher.RunnerTests;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.chhongzh.atriBotLauncher.RunnerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/atri_bot_launcher.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/atri_bot_launcher";
@@ -401,7 +401,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.atriBotLauncher.RunnerTests;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.chhongzh.atriBotLauncher.RunnerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/atri_bot_launcher.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/atri_bot_launcher";
@@ -415,7 +415,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.atriBotLauncher.RunnerTests;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.chhongzh.atriBotLauncher.RunnerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/atri_bot_launcher.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/atri_bot_launcher";
