@@ -50,7 +50,7 @@ class DashboardPage extends StatelessWidget {
               ),
               subtitle: Text(
                 settings.selectedVersion.value.isEmpty
-                    ? '最低支持版本 v${SettingsService.minimumVersion}'
+                    ? '还没有安装可用版本'
                     : '当前版本 ${settings.selectedVersion.value}',
               ),
               trailing: running

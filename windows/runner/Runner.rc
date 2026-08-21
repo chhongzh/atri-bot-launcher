@@ -89,11 +89,11 @@ BEGIN
     BEGIN
         BLOCK "040904e4"
         BEGIN
-            VALUE "CompanyName", "com.example" "\0"
-            VALUE "FileDescription", "atri_bot_launcher" "\0"
+            VALUE "CompanyName", "chhongzh" "\0"
+            VALUE "FileDescription", "Atri Bot Launcher是一个为Atri Bot开发的可视化启动器" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
             VALUE "InternalName", "atri_bot_launcher" "\0"
-            VALUE "LegalCopyright", "Copyright (C) 2026 com.example. All rights reserved." "\0"
+            VALUE "LegalCopyright", "Copyright (C) 2026 dev.chhongzh. All rights reserved." "\0"
             VALUE "OriginalFilename", "atri_bot_launcher.exe" "\0"
             VALUE "ProductName", "atri_bot_launcher" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"

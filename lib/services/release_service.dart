@@ -29,7 +29,7 @@ class ReleaseService extends GetxService {
     final uri = Uri.https(
       'api.github.com',
       '/repos/${SettingsService.repositoryOwner}/${SettingsService.repositoryName}/releases',
-      {'per_page': '30'},
+      {'per_page': '1'},
     );
     logs.info('正在获取 GitHub 发布列表', {'url': '$uri'});
     late final dio.Response<dynamic> response;
@@ -56,16 +56,7 @@ class ReleaseService extends GetxService {
         ? jsonDecode(response.data as String)
         : response.data;
     if (decoded is! List) throw const FormatException('GitHub release 响应格式错误');
-    final result = decoded.whereType<Map>().map(_parseRelease).where((release) {
-      try {
-        return release.version.compareTo(
-              SemVersion.parse(SettingsService.minimumVersion),
-            ) >=
-            0;
-      } catch (_) {
-        return false;
-      }
-    }).toList()..sort((a, b) => b.version.compareTo(a.version));
+    final result = decoded.whereType<Map>().map(_parseRelease).take(1).toList();
     releases.assignAll(result);
     logs.info('发布列表加载完成', {'release_count': result.length});
     return result;
@@ -76,7 +67,9 @@ class ReleaseService extends GetxService {
     void Function(double progress)? onProgress,
   }) async {
     final asset = _selectAsset(release);
-    if (asset == null) throw StateError('没有找到适合当前平台的发布文件');
+    if (asset == null) {
+      throw StateError('当前平台不支持此版本：仅支持架构匹配的 tar.gz 发布包');
+    }
     logs.info('已选择发布文件', {'version': release.tagName, 'asset': asset.name});
     final root = Directory(
       path.join(settings.dataDirectory.value, 'releases', release.tagName),
@@ -197,37 +190,32 @@ class ReleaseService extends GetxService {
         : Platform.isMacOS
         ? 'darwin'
         : 'linux';
-    final matching = release.assets.where((asset) {
+    final platformAssets = release.assets.where((asset) {
       final name = asset.name.toLowerCase();
-      return name.contains(operatingSystem) && name.contains(architecture);
+      return name.contains(operatingSystem) && _isTarGz(asset);
     }).toList();
-    if (matching.isNotEmpty) return matching.first;
-    for (final asset in release.assets) {
-      if (asset.name.toLowerCase().contains(operatingSystem)) return asset;
-    }
-    return null;
+    final architectureNames = architecture == 'amd64'
+        ? const ['amd64', 'x86_64']
+        : [architecture];
+    final architectureAssets = platformAssets.where((asset) {
+      final name = asset.name.toLowerCase();
+      return architectureNames.any(name.contains);
+    }).toList();
+
+    return architectureAssets.isEmpty ? null : architectureAssets.first;
+  }
+
+  bool _isTarGz(ReleaseAsset asset) {
+    return asset.name.toLowerCase().endsWith('.tar.gz');
   }
 
   Future<String> _prepareAsset(File downloaded, Directory root) async {
     final name = downloaded.path.toLowerCase();
-    if (!name.endsWith('.zip') &&
-        !name.endsWith('.tar.gz') &&
-        !name.endsWith('.tgz')) {
-      if (!path
-          .basename(downloaded.path)
-          .toLowerCase()
-          .startsWith('atri-bot')) {
-        throw StateError(
-          '下载的文件不是 atri-bot 内核：${path.basename(downloaded.path)}',
-        );
-      }
-      await executables.prepare(downloaded.path);
-      return downloaded.path;
+    if (!name.endsWith('.tar.gz')) {
+      throw StateError('当前版本不支持：仅支持 tar.gz 发布包');
     }
     final bytes = await downloaded.readAsBytes();
-    final archive = name.endsWith('.zip')
-        ? ZipDecoder().decodeBytes(bytes)
-        : TarDecoder().decodeBytes(GZipDecoder().decodeBytes(bytes));
+    final archive = TarDecoder().decodeBytes(GZipDecoder().decodeBytes(bytes));
     String? executable;
     for (final entry in archive) {
       if (!entry.isFile) continue;

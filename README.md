@@ -15,8 +15,8 @@
 
 ## 当前功能
 
-- 从 GitHub Releases 获取版本，最低支持 `v2.0.0-0`，包括 v2 稳定版和预发布版。
-- 按平台和架构选择 Android 可执行文件，或桌面端的 `zip`、`tar.gz` 压缩包。
+- 从 GitHub Releases 获取最新版本。
+- 按平台和架构选择统一的 `tar.gz` 内核压缩包。
 - 下载显示全局进度。桌面端解包时只启动 `atri-bot` 本体，不会误执行压缩包里的 LICENSE 或 README。
 - 内核文件保存到应用数据目录，桌面端会尝试补充执行权限。
 - `config.yaml` 支持递归读取和保存，配置项按 atri-bot 的实际结构分组，支持文本、布尔值、列表、对象和条件字段。
@@ -27,7 +27,7 @@
 
 ### 直接运行
 
-从 Releases 下载与你的平台匹配的启动器，安装后打开应用，再到版本页下载内核。启动器固定从 `chhongzh/atri-bot` 获取 v2.0.0-0 及以上版本，并自动管理内核和配置文件的位置。
+从 Releases 下载与你的平台匹配的启动器，安装后打开应用，再到版本页下载内核。启动器固定从 `chhongzh/atri-bot` 获取最新版本，并自动管理内核和配置文件的位置。
 
 首次启动 atri-bot 前，至少需要在配置页填写 Telegram Bot Token。完整的内核配置字段请看 [atri-bot 配置说明](https://github.com/chhongzh/atri-bot/blob/main/docs/configuration.md)。
 
@@ -61,7 +61,7 @@ flutter build apk --debug
 
 ### Android
 
-Android 构建固定使用 `targetSdkVersion 28`。内核下载到应用私有的 `data` 目录，启动器会先尝试通过 Dart `Process.start` 直接运行它。
+Android 构建固定使用 `targetSdkVersion 28`。内核使用对应架构的 `.tar.gz` 压缩包，下载到应用私有的 `data` 目录后解包，启动器会尝试通过 Dart `Process.start` 直接运行它。
 
 部分 ROM 可能因为 `noexec`、SELinux 或后台限制拒绝执行应用目录中的二进制文件。遇到这种情况，界面会保留真实异常信息。后续需要把 atri-bot 改成可加载的 JNI 或其他原生产物，再在 `KernelService` 中接入对应启动通道。
 
@@ -73,7 +73,7 @@ Android 构建固定使用 `targetSdkVersion 28`。内核下载到应用私有�
 
 ### Windows 和 Linux
 
-桌面端使用对应平台的压缩包，解包后以 `atri-bot` 为入口文件。启动器会把工作目录设为内核所在目录，配置文件和内核日志按 atri-bot 的行为保存。
+桌面端使用对应平台与架构的 `.tar.gz` 压缩包，解包后以 `atri-bot` 为入口文件。启动器会把工作目录设为内核所在目录，配置文件和内核日志按 atri-bot 的行为保存。
 
 ## 与 atri-bot 的关系
 
