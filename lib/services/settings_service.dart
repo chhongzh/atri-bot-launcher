@@ -8,6 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class SettingsService extends GetxService {
   static const repositoryOwner = 'chhongzh';
   static const repositoryName = 'atri-bot';
+  static const minimumVersion = '2.0.0-0';
   final selectedVersion = ''.obs;
   final configPath = ''.obs;
   final dataDirectory = ''.obs;
@@ -22,10 +23,20 @@ class SettingsService extends GetxService {
     configPath.value = _preferences?.getString('config_path') ?? '';
     executablePath.value = _preferences?.getString('executable_path') ?? '';
 
-    if (executablePath.value.isNotEmpty) {
-      final executableName = path.basename(executablePath.value).toLowerCase();
-      if (!executableName.startsWith('atri-bot') ||
-          !await File(executablePath.value).exists()) {
+    final executableName = path.basename(executablePath.value).toLowerCase();
+    if (executablePath.value.isNotEmpty &&
+        (!executableName.startsWith('atri-bot') ||
+            executableName.endsWith('.tar.gz') ||
+            executableName.endsWith('.zip'))) {
+      final candidate = File(
+        path.join(
+          path.dirname(executablePath.value),
+          Platform.isWindows ? 'atri-bot.exe' : 'atri-bot',
+        ),
+      );
+      if (await candidate.exists()) {
+        executablePath.value = candidate.path;
+      } else {
         executablePath.value = '';
         selectedVersion.value = '';
       }

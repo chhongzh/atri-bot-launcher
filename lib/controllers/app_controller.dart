@@ -54,6 +54,10 @@ class AppController extends GetxController {
   }
 
   Future<void> install(BotRelease release) async {
+    if (releases.downloading.value) {
+      notifications.showSnackBar('正在下载', '请等待当前内核下载完成');
+      return;
+    }
     busy.value = true;
     try {
       await releases.download(release);
