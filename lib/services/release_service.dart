@@ -282,6 +282,7 @@ class ReleaseService extends GetxService {
     return BotRelease(
       tagName: '${release['tag_name']}',
       title: '${release['name'] ?? release['tag_name']}',
+      notes: '${release['body'] ?? ''}'.trim(),
       publishedAt: DateTime.tryParse('${release['published_at']}'),
       prerelease: release['prerelease'] == true,
       assets: assets,

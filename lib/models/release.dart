@@ -16,6 +16,7 @@ class BotRelease {
   const BotRelease({
     required this.tagName,
     required this.title,
+    required this.notes,
     required this.publishedAt,
     required this.prerelease,
     required this.assets,
@@ -23,6 +24,7 @@ class BotRelease {
 
   final String tagName;
   final String title;
+  final String notes;
   final DateTime? publishedAt;
   final bool prerelease;
   final List<ReleaseAsset> assets;

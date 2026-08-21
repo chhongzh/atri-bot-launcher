@@ -80,15 +80,37 @@ class ReleaseTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      child: ListTile(
+      child: ExpansionTile(
         leading: const Icon(Icons.inventory_2_outlined),
         title: Text(release.title),
         subtitle: Text('${release.tagName} · ${release.assets.length} 个平台产物'),
-        trailing: FilledButton.tonalIcon(
-          onPressed: onInstall,
-          icon: const Icon(Icons.download),
-          label: const Text('安装'),
-        ),
+        childrenPadding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+        children: [
+          if (release.notes.isNotEmpty) ...[
+            const Align(alignment: Alignment.centerLeft, child: Text('发行说明')),
+            const SizedBox(height: 8),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: SelectableText(release.notes),
+            ),
+            const SizedBox(height: 16),
+          ] else
+            const Padding(
+              padding: EdgeInsets.only(bottom: 16),
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Text('此版本未提供发行说明。'),
+              ),
+            ),
+          Align(
+            alignment: Alignment.centerRight,
+            child: FilledButton.tonalIcon(
+              onPressed: onInstall,
+              icon: const Icon(Icons.download),
+              label: const Text('安装'),
+            ),
+          ),
+        ],
       ),
     );
   }
