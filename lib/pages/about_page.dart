@@ -40,7 +40,7 @@ class AboutPage extends StatelessWidget {
                     FilledButton.icon(
                       onPressed: () => _openUrl(context, _atriBotUri),
                       icon: const Icon(Icons.star_outline),
-                      label: const Text('给Atri-Bot点个 Star'),
+                      label: const Text('给Atri Bot点个 Star'),
                     ),
                     OutlinedButton.icon(
                       onPressed: () => _openUrl(context, _launcherUri),

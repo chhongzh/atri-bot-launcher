@@ -29,7 +29,7 @@ class DashboardPage extends StatelessWidget {
         children: [
           Text('欢迎回来', style: Theme.of(context).textTheme.headlineMedium),
           const SizedBox(height: 8),
-          Text('一键运行Atri-Bot', style: Theme.of(context).textTheme.bodyLarge),
+          Text('一键运行Atri Bot', style: Theme.of(context).textTheme.bodyLarge),
           const SizedBox(height: 24),
           Card(
             child: ListTile(

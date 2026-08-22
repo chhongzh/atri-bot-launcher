@@ -88,7 +88,7 @@ const _sections = [
   ),
   ConfigSectionDefinition(
     title: '网络安全',
-    description: '控制 atri-bot 是否允许访问本机和内网地址。',
+    description: '控制 Atri Bot 是否允许访问本机和内网地址。',
     fields: [
       ConfigDefinition(
         path: 'security.allow_private_ip',
@@ -100,7 +100,7 @@ const _sections = [
   ),
   ConfigSectionDefinition(
     title: '数据库',
-    description: 'atri-bot 用来保存账户、会话和工具配置。普通用户请选择 SQLite。',
+    description: 'Atri Bot 用来保存账户、会话和工具配置。普通用户请选择 SQLite。',
     fields: [
       ConfigDefinition(
         path: 'database.type',
@@ -166,7 +166,7 @@ const _sections = [
     fields: [
       ConfigDefinition(
         path: 'atri_cwd',
-        title: 'atri-bot 数据目录',
+        title: 'Atri Bot 数据目录',
         description: '留空或填写 . 表示使用启动器传入的当前工作目录。',
       ),
     ],

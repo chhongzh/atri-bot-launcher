@@ -34,18 +34,18 @@ class NotificationService extends GetxService {
   Future<void> showProcessExit(int exitCode) async {
     showSnackBar(
       '内核已停止',
-      exitCode == 0 ? 'atri-bot 已正常退出' : 'atri-bot 异常退出（代码 $exitCode）',
+      exitCode == 0 ? 'Atri Bot 已正常退出' : 'Atri Bot 异常退出（代码 $exitCode）',
     );
     try {
       await _notifications.show(
         id: 1001,
-        title: 'atri-bot 内核已停止',
+        title: 'Atri Bot 内核已停止',
         body: exitCode == 0 ? '进程已正常退出' : '进程异常退出，退出码：$exitCode',
         notificationDetails: const NotificationDetails(
           android: AndroidNotificationDetails(
             'atri_bot_process',
             '进程状态',
-            channelDescription: 'atri-bot 内核进程状态通知',
+            channelDescription: 'Atri Bot 内核进程状态通知',
             importance: Importance.high,
             priority: Priority.high,
           ),

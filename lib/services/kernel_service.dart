@@ -40,7 +40,7 @@ class KernelService extends GetxService {
     if (isRunning) return;
     final executable = settings.executablePath.value;
     if (executable.isEmpty || !await File(executable).exists()) {
-      throw StateError('还没有安装 atri-bot 内核');
+      throw StateError('还没有安装 Atri Bot 内核');
     }
     state.value = KernelState.starting;
     error.value = null;

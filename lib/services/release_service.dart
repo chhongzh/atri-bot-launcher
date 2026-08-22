@@ -248,7 +248,7 @@ class ReleaseService extends GetxService {
           .toLowerCase()
           .startsWith('atri-bot')) {
         throw StateError(
-          '下载的文件不是 atri-bot 内核：${path.basename(downloaded.path)}',
+          '下载的文件不是 Atri Bot 内核：${path.basename(downloaded.path)}',
         );
       }
       await executables.prepare(downloaded.path);
@@ -285,7 +285,7 @@ class ReleaseService extends GetxService {
     if (Platform.isWindows) return 'windows';
     if (Platform.isMacOS) return 'darwin';
     if (Platform.isLinux) return 'linux';
-    throw UnsupportedError('当前操作系统不支持下载 atri-bot 内核');
+    throw UnsupportedError('当前操作系统不支持下载 Atri Bot 内核');
   }
 
   String _architecture() {
